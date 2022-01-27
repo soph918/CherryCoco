@@ -17,7 +17,6 @@ for r in range (0, 10):
         else:
             score_t[r] = score[r][0] + score[r][1]
     
-
 print(score_t)
 sum = sum(score_t)
 print(sum)

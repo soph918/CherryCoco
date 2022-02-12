@@ -16,8 +16,6 @@ class Member:
     def __iter__(self):
         return iter([self.member_name, self.phone_number, self.rent_book])
 
-    
-
 class Book:
     book_name = ""
     book_author = ""
@@ -174,8 +172,6 @@ with open('member.csv', 'w', newline='') as f:
 with open('book.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerows(library.book_list)
-
-
 
 # with open('library.csv', 'w', newline='') as f:
 #     fields = ['이름', '핸드폰번호', '빌린 책']

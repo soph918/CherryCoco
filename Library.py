@@ -1,6 +1,7 @@
+# 회원 등록, 변경, 삭제, 대여, 반납, 도서 등록, 변경, 삭제
+# 멤버 리스트 정보 파일, 책 정보 리스트 파일 만들기 TBC
 
-# 기본 기능: 회원 등록, 변경, 삭제, 대여, 반납, 도서 등록, 변경, 삭제
-# 추가 예정 기능: 멤버 리스트 정보 파일, 책 정보 리스트 파일 
+import csv
 
 class Member:
     member_name = ""
@@ -12,6 +13,11 @@ class Member:
         self.phone_number = phonenumber
         self.rent_book = [] # 이게 왜 rentbook이면 안 됨?
 
+    def __iter__(self):
+        return iter([self.member_name, self.phone_number, self.rent_book])
+
+    
+
 class Book:
     book_name = ""
     book_author = ""
@@ -19,6 +25,9 @@ class Book:
     def __init__(self, name, author):
         self.book_name = name
         self.book_author = author
+    
+    def __iter__(self):
+        return iter([self.book_name, self.book_author])
 
 class Library:
     member_list = []
@@ -71,6 +80,7 @@ class Library:
             print(book.book_name, book.book_author)  
 
 library = Library()
+
 # library.regist_member("이주혜", "010-5175-3795")
 # library.rent_book("이주혜", "파이썬어려워")
 # library.rent_book("이주혜", "살려줘")
@@ -87,6 +97,9 @@ library = Library()
 # library.regist_book("샤모니", "밍동")
 # library.remove_book("샤모니")
 # library.show_booklist()
+   
+
+
 
 while True:
     print("1. 회원 정보 등록")
@@ -153,3 +166,20 @@ while True:
         break
     else:
         print("없는 메뉴입니다. \n")
+
+with open('member.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerows(library.member_list)
+
+with open('book.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerows(library.book_list)
+
+
+
+# with open('library.csv', 'w', newline='') as f:
+#     fields = ['이름', '핸드폰번호', '빌린 책']
+#     writer = csv.DictWriter(f, fieldnames=fields)
+#     writer.writeheader()
+#     for v in library.member_list:
+#         writer.writerow({'이름': v[0], '핸드폰번호': v[1], '빌린 책': v[2]})
